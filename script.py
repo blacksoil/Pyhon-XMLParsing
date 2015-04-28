@@ -7,7 +7,7 @@ sep = ","
 
 
 def getHeader():
-	string = "TRP_ID,TRP_ATA,TRP_PORT_FROM,VES_VESSEL_NAME,VES_VESSEL_FLAG,TRP_CURRENT_LOCATION,AGT_NAME,TYPE,START_TIME,END_TIME,ACT,LOCATION,CLR_NEXT_PORT" 
+	string = "TRP_ID#TRP_ATA#TRP_PORT_FROM#VES_VESSEL_NAME#VES_VESSEL_FLAG#TRP_CURRENT_LOCATION#AGT_NAME#TYPE#START_TIME#END_TIME#ACT#LOCATION#CLR_NEXT_PORT" 
 	return string
 
 def getText(parentElement, tag):
@@ -18,7 +18,6 @@ def getText(parentElement, tag):
 		return ""
 
 def main():
-	print "hello: %s" % filename
 	tree = ET.parse(filename)
 	root = tree.getroot()
 	lgv_elem = root.find("LIST_G_VESSEL")

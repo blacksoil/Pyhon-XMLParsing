@@ -50,7 +50,7 @@ class Row:
 		else:
 			pl = ""
 
-		string = self.trp_id + "," + self.trp_ata + "," + self.trp_port_from + "," + self.ves_vessel_name + "," + self.ves_vessel_flag + "," + self.trp_current_location + "," + self.agt_name + "," + al[0] + "," + al[1]  + "," + al[2] + "," + al[3] + "," + al[4] + "," + pl
+		string = self.trp_id + "#" + self.trp_ata + "#" + self.trp_port_from + "#" + self.ves_vessel_name + "#" + self.ves_vessel_flag + "#" + self.trp_current_location + "#" + self.agt_name + "#" + al[0] + "#" + al[1]  + "#" + al[2] + "#" + al[3] + "#" + al[4] + "#" + pl
 		return string
 
 	def printNoParent(self, activity, port):
@@ -69,8 +69,8 @@ class Row:
 
 		string = ""
 		for i in range(0,7):
-			string += ","
-		string += al[0] + "," + al[1]  + "," + al[2] + "," + al[3] + "," + al[4] + "," + pl
+			string += "#"
+		string += al[0] + "#" + al[1]  + "#" + al[2] + "#" + al[3] + "#" + al[4] + "#" + pl
 		return string
 
 	def dump(self):
