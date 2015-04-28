@@ -1,8 +1,21 @@
 import xml.etree.ElementTree as ET
+from Row import Row
 
 filename = 'RP06505.XML'
 sep = ","
 #tree = ET.parse('RP06505.XML')
+
+
+def getHeader():
+	string = "TRP_ID,TRP_ATA,TRP_PORT_FROM,VES_VESSEL_NAME,VES_VESSEL_FLAG,TRP_CURRENT_LOCATION,AGT_NAME,TYPE,START_TIME,END_TIME,ACT,LOCATION,CLR_NEXT_PORT" 
+	return string
+
+def getText(parentElement, tag):
+	e = parentElement.find(tag)
+	if e is not None:
+		return e.text
+	else:
+		return ""
 
 def main():
 	print "hello: %s" % filename
@@ -10,29 +23,20 @@ def main():
 	root = tree.getroot()
 	lgv_elem = root.find("LIST_G_VESSEL")
 	print_header = True
-
 	# Print header
-	gv_elem = lgv_elem.find("G_VESSEL")
-	string = ""
-	count = 0;
-	for e in gv_elem.iter():
-		if isLeaf(e):
-			count+=1
-			string += e.tag + sep
-	print str(count) + ":" + string + "\n"
+	#gv_elem = lgv_elem.find("G_VESSEL")
+	#string = ""
+	#for e in gv_elem.iter():
+	#	if isLeaf(e):
+	#		string += e.tag + sep
+	#print string + "\n"
+	print getHeader();
 
+	em = root.find("LIST_G_VESSEL")
 	# Print each of the value
-	for es in lgv_elem.findall("G_VESSEL"):
-		string = ""
-		count = 0;
-		for e in es:
-			if isLeaf(e):
-				count+=1
-				if e.text is None:
-					string += " " + sep
-				else: 
-					string += e.text + sep
-		print str(count) + ": " + string + "\n"
+	for gv in em.findall("G_VESSEL"):
+		row = Row(getText(gv, "TRP_ID"), getText(gv, "TRP_ATA"), getText(gv, "TRP_PORT_FROM"), getText(gv, "VES_VESSEL_NAME"), getText(gv, "VES_VESSEL_FLAG"), getText(gv, "TRP_CURRENT_LOCATION"), getText(gv, "AGT_NAME"))
+		print row.dump() 
 
 def isLeaf(elem):
 	if sum (1 for _ in elem.iter()) == 1:

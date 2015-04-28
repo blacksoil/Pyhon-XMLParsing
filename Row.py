@@ -77,6 +77,7 @@ class Row:
 		len_a = len(self.activitylist)
 		len_p = len(self.nextportlist)
 		len_max = max(len_a, len_p)	
+		len_max = max(len_max, 1)
 		string = ""
 		for i in range(0, len_max):
 			a = self.activitylist[i] if len(self.activitylist) > i else None
@@ -89,7 +90,10 @@ class Row:
 		return string	
 					
 def main():
+	print "Begin!"
 	row = Row(15013213,"2015/03/14 16:13" ,"OPEN SEA" , "YMH LIVE FISH CARRIER" , "PHI", "LUKCHAU" , "ISM SHIPPING AGENT COMPANY"); 
+	print row.dump()
+
 	row.addActivity("","A","2015/04/27 12:50","" ,"COK","")
 	row.addNextPort("");
 	print row.dump()
